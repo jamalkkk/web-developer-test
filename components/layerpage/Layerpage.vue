@@ -1,10 +1,9 @@
-<!-- Please remove this file from your project -->
 <template>
   <div
     class="b-layerpage"
   >
     <Header />
-
+    <slot></slot>
     <Footer />
   </div>
 </template>

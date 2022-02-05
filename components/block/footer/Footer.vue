@@ -34,21 +34,25 @@
         <div class="footer-socials">
              <apps-icon-link
                 class="footer-link"
+                :is-big="true"
                 icon="google"
                 link="/google"
             />
              <apps-icon-link
                 class="footer-link"
+                :is-big="true"
                 icon="facebook"
                 link="/facebook"
             />
              <apps-icon-link
                 class="footer-link"
+                :is-big="true"
                 icon="instagram"
                 link="/instagram"
             />
              <apps-icon-link
                 class="footer-link"
+                :is-big="true"
                 icon="twitter"
                 link="/twitter"
             />
@@ -73,7 +77,7 @@ export default {
         position: relative;
         display: flex;
         width: 100%;
-        height: 11rem;
+        height: 28rem;
         padding: 0 4.5rem;
         align-items: center;
         justify-content: space-between;
@@ -107,6 +111,8 @@ export default {
         .footer-copyrights {
             margin: 0;
             text-align: right;
+            font-size: 1.2rem;
+            color: #767676
         }
     }
 </style>
