@@ -1,5 +1,7 @@
 <template>
-  <Tutorial/>
+  <Layerpage 
+    text="dsfsdfds"
+  />
 </template>
 
 <script>

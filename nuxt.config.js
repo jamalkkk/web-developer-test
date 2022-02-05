@@ -21,6 +21,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/assets/css/main.scss',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -28,10 +29,19 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: [
+    // { path: '~/components/block/', extensions: ['vue'] },
+    // { path: '~/components/common/', extensions: ['vue'] },
+    {
+      path: '~/components',
+      pathPrefix: false,
+    }
+  ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxtjs/google-fonts',
+    "@nuxtjs/svg",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -42,5 +52,13 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  googleFonts: {
+    families: {
+      'Libre+Franklin': [200, 400],
+    },
+    display: 'swap',
+    download: true,
   }
 }
