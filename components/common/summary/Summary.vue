@@ -26,6 +26,7 @@
             <div class="summary-items">
                 <summary-item 
                     v-for="(item, index) in items" :key="index"
+                    :index="index"
                     :name="item.name"
                     :price="item.price"
                     :size="item.size"
@@ -33,36 +34,101 @@
                     :quantity="item.quantity"
                     :add="add"
                     :reduce="reduce"
+                    :remove="remove"
                 />
             </div>
+            <div class="summary-total row no-gutters mb-2">
+                <apps-headline 
+                    :is-dark="true"
+                    :is-font-light="true"
+                    tag="p"
+                    text="Subtotal"
+                    class="col-md-9"
+                />
+                <apps-headline 
+                    :is-dark="true"
+                    :is-font-light="true"
+                    tag="p"
+                    :text="subtotal"
+                    class="col-md-2 text-right"
+                />
+            </div>
+            <div class="summary-total row no-gutters mb-2">
+                <apps-headline 
+                    :is-dark="true"
+                    :is-font-light="true"
+                    tag="p"
+                    text="VAT at 20%"
+                    class="col-md-9"
+                />
+                <apps-headline 
+                    :is-dark="true"
+                    :is-font-light="true"
+                    tag="p"
+                    :text="vat"
+                    class="col-md-2 text-right"
+                />
+            </div>
+            <div class="summary-total row no-gutters">
+                <apps-headline 
+                    :is-dark="true"
+                    tag="p"
+                    text="Total"
+                    class="col-md-9"
+                />
+                <apps-headline 
+                    :is-dark="true"
+                    tag="p"
+                    :text="total"
+                    class="col-md-2 text-right"
+                />
+            </div>
+            <form 
+                class="summary-form"
+                :action="submit"
+            >
+                <div class="summary-cta col-md-11 text-right p-0">
+                    <apps-text-cta
+                        :is-blue="true"
+                        :is-button="true"
+                        type="submit"
+                        text="Buy Now"
+                    />
+                </div>
+            </form>
         </div>
     </div>
 </template>
 
 <script>
+
+const Headings = [
+    {
+        name: 'Product',
+        size: '4',
+    },
+    {
+        name: 'Price',
+        size: '2',
+    },
+    {
+        name: 'Quantity',
+        size: '3',
+    },
+    {
+        name: 'Cost',
+        size: '3',
+    },
+];
 export default {
     name: 'Summary',
     data () {
         return {
-            headings: [
-                {
-                    name: 'Product',
-                    size: '4',
-                },
-                {
-                    name: 'Price',
-                    size: '2',
-                },
-                {
-                    name: 'Quantity',
-                    size: '3',
-                },
-                {
-                    name: 'Cost',
-                    size: '3',
-                },
-            ],
+            headings: Headings,
             items: [],
+            subtotal: '',
+            vat: '',
+            total: '',
         };
     },
     props: {
@@ -91,37 +157,52 @@ export default {
             default: () => [],
         },
     },
-    computed: {
-        allItems() {
-            this.boughtProducts.forEach(boughtProduct=> {
-                if(this.itemExists(boughtProduct.sku)) {
-                    this.items.push()
-                }
-            })
+    watch: {
+        items() {
+            let subtotal = 0;
+
+            this.items.forEach(({ price, quantity }) => {
+                subtotal += price * quantity;
+            });
+
+            this.subtotal = `£${this.twoDecimals(subtotal)}`;
+            this.vat = `£${this.twoDecimals(subtotal * 0.2)}`;
+            this.total = `£${this.twoDecimals(subtotal + subtotal * 0.2)}`;
         },
     },
     methods: {
-        add() {
-            console.log('add');
+        add(index) {
+            this.items[index].quantity ++;
+
+            this.items = [ ...this.items ];
         },
-        reduce() {
-            console.log('reduce');
+        reduce(index) {
+            this.items[index].quantity --;
+
+            this.items = [ ...this.items ];
+        },
+        remove(index) {
+            this.items.splice(index, 1);
+
+            this.items = [ ...this.items ];
         },
         setItems() {
-            this.boughtProducts.forEach((a) => {
-                this.allProducts.forEach((b) => {
-                    if (a.sku === b.sku) {
+            this.boughtProducts.forEach((bProduct) => {
+                this.allProducts.forEach((aProduct) => {
+                    if (bProduct.sku === aProduct.sku) {
                          this.items.push({
-                             ...a,
-                             ...b,
+                             ...bProduct,
+                             ...aProduct,
                          });
                     }
                 });
             });
         },
+        twoDecimals(amount) {
+            return (Math.round(amount * 100) / 100).toFixed(2)
+        },
     },
     mounted() {
-        console.log(this.allProducts);
         this.setItems();
     }
 }
@@ -133,6 +214,7 @@ export default {
         max-width: 69rem;
         margin: 12rem auto;
         padding: 0 1.5rem;
+        
 
         .summary-table {
             margin-top: 4.5rem;
@@ -141,6 +223,14 @@ export default {
 
         .summary-headings {
             border-bottom: 2px solid #efefef;
+        }
+
+        .summary-items {
+            margin-bottom: 4.5rem;
+        }
+
+        .summary-form {
+            margin-top: 4.5rem;
         }
     }
 </style>

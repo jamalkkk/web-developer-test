@@ -29,11 +29,11 @@
                 :is-font-light="true"
             />
             <div class="content-cta">
-                <apps-text-link
+                <apps-text-cta
                     class="content-link"
                     :text="ctaText"
                     :link="ctaLink"
-                    :is-cta="true"
+                    :is-blue="true"
                 />
             </div>
         </div>

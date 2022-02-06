@@ -19,17 +19,17 @@
             'is-active': isMenuActive,
         }]"
     >
-        <apps-text-link
+        <apps-text-cta
             class="header-link"
             text="PRODUCTS"
             link="/products"
         />
-        <apps-text-link
+        <apps-text-cta
             class="header-link"
             text="NEWS"
             link="/news"
         />
-        <apps-text-link
+        <apps-text-cta
             class="header-link"
             text="CONTACT"
             link="/contact"

@@ -5,18 +5,19 @@
             :is-font-light="true"
             tag="p"
             :text="text"
-            class="summary-item-column col-md-4"
+            class="summary-item-column col-md-3 mb-0"
         />
         <apps-headline 
             :is-dark="true"
             :is-font-light="true"
             tag="p"
             :text="amount"
-            class="summary-item-column col-md-2"
+            class="summary-item-column col-md-2 text-right mb-0"
         />
-        <div class="summary-item-column col-md-3">
+        <div class="summary-item-column col-md-4">
             <quantity 
-                :value="number"
+                :value="quantity"
+                :max="stockLevel"
                 :add="addItem"
                 :reduce="reduceItem"
             />
@@ -26,7 +27,13 @@
             :is-font-light="true"
             tag="p"
             :text="total"
-            class="summary-item-column col-md-3"
+            class="summary-item-column col-md-2 text-right mb-0"
+        />
+        <apps-icon-cta
+            :is-button="true"
+            icon="delete"
+            :on-click="removeItem"
+            class="summary-item-column col-md-1"
         />
     </div>
 </template>
@@ -40,6 +47,10 @@ export default {
         };
     },
     props: {
+        index: { 
+            type: Number, 
+            default: 0,
+        },
         name: { 
             type: String, 
             default: 'Item',
@@ -50,15 +61,15 @@ export default {
         },
         size: { 
             type: String, 
-            default: 'small',
+            default: 'one size',
         },
         quantity: { 
             type: Number, 
-            default: 2,
+            default: 0,
         },
         stockLevel: { 
             type: Number, 
-            default: 2,
+            default: 1,
         },
         add: { 
             type: Function, 
@@ -93,14 +104,13 @@ export default {
     },
     methods: {
         addItem () {
-            this.number += 1;
-            console.log('add');
-            this.add();
+            this.add(this.index);
         },
         reduceItem () {
-            this.number -= 1;
-            console.log('reduce');
-            this.reduce();
+            this.reduce(this.index);
+        },
+        removeItem () {
+            this.remove(this.index);
         },
     }
 }
@@ -108,7 +118,9 @@ export default {
 
 <style lang="scss">
     .b-summary-item {
+        display: flex;
         width: 100%;
         margin: 1.5rem 0;
+        align-items: center;
     }
 </style>

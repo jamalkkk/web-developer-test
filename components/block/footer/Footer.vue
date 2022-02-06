@@ -8,22 +8,22 @@
             <apps-logo />
         </div>
         <div class="footer-navbar">
-            <apps-text-link
+            <apps-text-cta
                 class="footer-link"
                 text="PRODUCTS"
                 link="/products"
             />
-            <apps-text-link
+            <apps-text-cta
                 class="footer-link"
                 text="NEWS"
                 link="/news"
             />
-            <apps-text-link
+            <apps-text-cta
                 class="footer-link"
                 text="CONTACT"
                 link="/contact"
             />
-            <apps-text-link
+            <apps-text-cta
                 class="footer-link"
                 text="VIEW CART"
                 link="/checkout"

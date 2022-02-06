@@ -7,7 +7,8 @@
         'is-big': isBig,
         'is-small': isSmall,
     }]"
-    :href=link
+    :disabled="isDisabled"
+    :href="link"
     @click="onClick"
   />
 </template>
@@ -28,9 +29,9 @@ export default {
             type: Boolean, 
             default: false
         },
-        color: { 
-            type: String, 
-            default: ''
+        isDisabled: { 
+            type: Boolean, 
+            default: false
         },
         link: { 
             type: String, 
@@ -77,6 +78,14 @@ export default {
         &.is-small {
             width: .7rem;
             height: .7rem;
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+
+            svg {
+                fill: #ccc;
+            }
         }
 
         svg {

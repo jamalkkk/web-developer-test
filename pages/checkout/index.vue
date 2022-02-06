@@ -10,7 +10,22 @@
 </template>
 
 <script>
-import products from '~/api/products/index.json'
+import products from '~/api/products/index.json';
+
+const BoughtProducts = [
+    {
+        sku: "AWDT0001-M",
+        quantity: 1,
+    },
+    {
+        sku: "AWDT0002",
+        quantity: 2,
+    },
+    {
+        sku: "AWDT0003-M",
+        quantity: 1,
+    },
+];
 
 export default {
   head() {
@@ -21,20 +36,7 @@ export default {
   data() {
       return {
           products: [],
-          boughtProducts: [
-              {
-                  sku: "AWDT0001-M",
-                  quantity: 1,
-              },
-              {
-                  sku: "AWDT0002",
-                  quantity: 2,
-              },
-              {
-                  sku: "AWDT0003-M",
-                  quantity: 1,
-              },
-          ],
+          boughtProducts: BoughtProducts,
       };
   },
   asyncData ({ params }) {

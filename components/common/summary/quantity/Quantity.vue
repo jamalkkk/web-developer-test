@@ -3,6 +3,7 @@
         <apps-icon-cta
             :is-button="true"
             :is-small="true"
+            :is-disabled="!value"
             class="p-0"
             icon="minus"
             :on-click="reduce"
@@ -17,6 +18,7 @@
         <apps-icon-cta
             :is-button="true"
             :is-small="true"
+            :is-disabled="value === max"
             class="p-0"
             icon="plus"
             :on-click="add"
@@ -34,6 +36,10 @@ export default {
     },
     props: {
         value: { 
+            type: Number, 
+            default: 1,
+        },
+        max: { 
             type: Number, 
             default: 1,
         },
@@ -59,6 +65,7 @@ export default {
         display: flex;
         width: 7.5rem;
         height: 3rem;
+        margin: 0 auto;
         border: 1px solid #448AFF;
         border-radius: 3px;
         align-items: center;
