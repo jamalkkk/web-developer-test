@@ -20,13 +20,13 @@
              <apps-headline 
                 tag="h2"
                 :text="title"
-                :is-light="true"
+                :is-font-light="true"
                 class="mb-3"
             />
             <apps-headline 
                 tag="h4"
                 :text="subtitle"
-                :is-light="true"
+                :is-font-light="true"
             />
             <div class="content-cta">
                 <apps-text-link
@@ -41,11 +41,8 @@
 </template>
 
 <script>
-import AppsImg from '../../common/apps-img/AppsImg.vue'
-import Content from '../content/Content.vue'
 export default {
-  components: { AppsImg, Content },
-name: 'MixedMedia',
+    name: 'MixedMedia',
     props: {
         isCentered: { 
             type: Boolean, 
@@ -82,25 +79,44 @@ name: 'MixedMedia',
 <style lang="scss">
     .b-mixed-media {
         display: flex;
+        flex-direction: column;
 
-        .mixed-media-img {
-            width: 50%;
-            height: 50vw;
+        @include lg {
+            flex-direction: row;
         }
 
         &.has-image {
             .mixed-media-content {
                 display: flex;
                 flex-direction: column;
-                width: 50%;
                 justify-content: center;
+
+                @include lg {
+                    width: 50%;
+                }
+            }
+        }
+
+        .mixed-media-img {
+            width: 100%;
+            height: 100vw;
+            order: 2;
+
+            @include lg {
+                width: 50%;
+                height: 50vw;
+                order: 0;
             }
         }
 
         .mixed-media-content {
             position: relative;
             width: 100%;
-            padding: 13rem;
+            padding: 6rem 3.5rem;
+
+            @include lg {
+                padding: 13rem;
+            }
 
             .content-cta {
                 margin-top: 5.5rem;

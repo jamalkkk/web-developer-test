@@ -16,7 +16,7 @@
             <AppsHeadline 
                 tag="h1"
                 :text="title"
-                :is-light="true"
+                :is-font-light="true"
                 :is-inverted="true"
             />
         </div>
@@ -54,6 +54,7 @@ name: 'Hero',
         height: calc(100vh - 11rem);
 
         .hero-content {
+
             position: absolute;
             display: flex;
             flex-direction: column;
@@ -61,9 +62,13 @@ name: 'Hero',
             height: 100%;
             top: 0;
             left: 0;
-            padding: 0 13rem;
-            align-items: start;
+            padding: 0 1.5rem;
+            align-items: flex-start;
             justify-content: center;
+
+            @include lg {
+                padding: 0 13rem;
+            }
         }
     }
 </style>

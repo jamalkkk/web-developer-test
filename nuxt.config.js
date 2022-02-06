@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'web-developer-test',
+    title: 'APPS',
     htmlAttrs: {
       lang: 'en'
     },
@@ -28,6 +28,12 @@ export default {
   plugins: [
   ],
 
+  styleResources: {
+      scss: [
+          '~/assets/scss/**/*.scss',
+      ],
+  },
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
     // { path: '~/components/block/', extensions: ['vue'] },
@@ -42,6 +48,7 @@ export default {
   buildModules: [
     '@nuxtjs/google-fonts',
     "@nuxtjs/svg",
+    '@nuxtjs/style-resources',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

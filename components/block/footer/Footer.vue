@@ -32,25 +32,25 @@
     </div>
     <div class="footer-right-items">
         <div class="footer-socials">
-             <apps-icon-link
+             <apps-icon-cta
                 class="footer-link"
                 :is-big="true"
                 icon="google"
                 link="/google"
             />
-             <apps-icon-link
+             <apps-icon-cta
                 class="footer-link"
                 :is-big="true"
                 icon="facebook"
                 link="/facebook"
             />
-             <apps-icon-link
+             <apps-icon-cta
                 class="footer-link"
                 :is-big="true"
                 icon="instagram"
                 link="/instagram"
             />
-             <apps-icon-link
+             <apps-icon-cta
                 class="footer-link"
                 :is-big="true"
                 icon="twitter"

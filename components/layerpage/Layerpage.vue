@@ -1,10 +1,8 @@
 <template>
-  <div
-    class="b-layerpage"
-  >
-    <Header />
+  <div class="b-layerpage">
+    <Header hasShadow/>
     <slot></slot>
-    <Footer />
+    <Footer v-show="hasFooter"/>
   </div>
 </template>
 
@@ -12,7 +10,14 @@
 export default {
   name: 'Layerpage',
   props: {
-      text: 'Blah',
+      hasShadow: { 
+          type: Boolean, 
+          default: false,
+      },
+      hasFooter: { 
+          type: Boolean, 
+          default: true,
+      },
   },
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
-    <Layerpage> 
-        <Hero
+    <layerpage> 
+        <hero
             title="Lagom"
             subtitle="APPS unveils new studio"
             img-name="hero"
@@ -25,9 +25,11 @@
 </template>
 
 <script>
-import MixedMedia from '../components/block/mixed-media/MixedMedia.vue'
 export default {
-  components: { MixedMedia },
-  name: 'IndexPage'
+  head() {
+    return {
+      title: "APPS"
+    };
+  }
 }
 </script>

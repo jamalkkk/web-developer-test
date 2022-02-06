@@ -3,8 +3,9 @@
     <component
         :is="tag"
         :class="['b-headline', {
-            'is-light': isLight,
+            'is-font-light': isFontLight,
             'is-inverted': isInverted,
+            'is-dark': isDark,
         }]"
         v-html="text"
     >
@@ -15,6 +16,18 @@
 export default {
     name: 'AppsIconLink',
     props: {
+        isFontLight: { 
+            type: Boolean, 
+            default: false
+        },
+        isInverted: { 
+            type: Boolean, 
+            default: false
+        },
+        isDark: { 
+            type: Boolean, 
+            default: false
+        },
         tag: { 
             type: String, 
             default: 'h1'
@@ -22,14 +35,6 @@ export default {
         text: { 
             type: String, 
             default: ''
-        },
-        isLight: { 
-            type: Boolean, 
-            default: false
-        },
-        isInverted: { 
-            type: Boolean, 
-            default: false
         },
     },
     computed: {
@@ -45,12 +50,16 @@ export default {
     .b-headline {
         color: #0009;
         
-        &.is-light {
+        &.is-font-light {
             font-weight: 200;
         }
 
         &.is-inverted {
             color: #fff;
+        }
+
+        &.is-dark {
+            color: #000;
         }
     }
 </style>
