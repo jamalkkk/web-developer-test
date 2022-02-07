@@ -1,5 +1,5 @@
 <template>
-  <div class="b-layerpage">
+  <div class="b-layerpage p-relative">
     <Header hasShadow/>
     <slot></slot>
     <Footer v-show="hasFooter"/>
@@ -24,6 +24,6 @@ export default {
 
 <style lang="scss">
     .b-layerpage {
-        position: relative;
+        overflow-x: hidden;
     }
 </style>

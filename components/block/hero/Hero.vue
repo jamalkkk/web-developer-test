@@ -54,7 +54,6 @@ name: 'Hero',
         height: calc(100vh - 11rem);
 
         .hero-content {
-
             position: absolute;
             display: flex;
             flex-direction: column;
@@ -65,8 +64,11 @@ name: 'Hero',
             padding: 0 1.5rem;
             align-items: flex-start;
             justify-content: center;
+            opacity: 0;
 
-            @include lg {
+            animation: $fade-in-animation;
+
+            @include md {
                 padding: 0 13rem;
             }
         }

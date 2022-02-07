@@ -4,23 +4,44 @@
             :is-dark="true"
             :is-font-light="true"
             tag="h3"
-            :text="title"
+            :text="!isSubmitted ? title : 'Congratulation!'"
             class="mb-4"
         />
         <apps-headline 
             :is-dark="true"
             :is-font-light="true"
             tag="p"
-            :text="subtitle"
+            :text="!isSubmitted ? subtitle : 'You have successfully placed your order.'"
         />
-        <div class="summary-table container">
-            <div class="summary-headings row no-gutters pb-3">
+        <div 
+            :class="['summary-table container mx-0 mw-100', {
+                'd-none': isSubmitted,
+            }]"
+        >
+            <div class="summary-headings row no-gutters pb-3 d-none d-md-flex">
                 <apps-headline 
-                    v-for="(heading, index) in headings" :key="index"
                     :is-dark="true"
                     tag="h5"
-                    :text="heading.name"
-                    :class="`summary-heading col-${heading.size}`"
+                    text="Product"
+                    class="summary-heading col-3"
+                />
+                <apps-headline 
+                    :is-dark="true"
+                    tag="h5"
+                    text="Price"
+                    class="summary-heading col-2 text-right"
+                />
+                <apps-headline 
+                    :is-dark="true"
+                    tag="h5"
+                    text="Product"
+                    class="summary-heading col-4 text-center"
+                />
+                <apps-headline 
+                    :is-dark="true"
+                    tag="h5"
+                    text="Cost"
+                    class="summary-heading col-2 text-right"
                 />
             </div>
             <div class="summary-items">
@@ -35,6 +56,8 @@
                     :add="add"
                     :reduce="reduce"
                     :remove="remove"
+                    :set-quantity="setQuantity"
+
                 />
             </div>
             <div class="summary-total row no-gutters mb-2">
@@ -43,14 +66,14 @@
                     :is-font-light="true"
                     tag="p"
                     text="Subtotal"
-                    class="col-md-9"
+                    class="col col-md-9"
                 />
                 <apps-headline 
                     :is-dark="true"
                     :is-font-light="true"
                     tag="p"
-                    :text="subtotal"
-                    class="col-md-2 text-right"
+                    :text="`£${subtotal}`"
+                    class="col-2 text-right"
                 />
             </div>
             <div class="summary-total row no-gutters mb-2">
@@ -59,14 +82,14 @@
                     :is-font-light="true"
                     tag="p"
                     text="VAT at 20%"
-                    class="col-md-9"
+                    class="col col-md-9"
                 />
                 <apps-headline 
                     :is-dark="true"
                     :is-font-light="true"
                     tag="p"
-                    :text="vat"
-                    class="col-md-2 text-right"
+                    :text="`£${vat}`"
+                    class="col-2 text-right"
                 />
             </div>
             <div class="summary-total row no-gutters">
@@ -74,23 +97,25 @@
                     :is-dark="true"
                     tag="p"
                     text="Total"
-                    class="col-md-9"
+                    class="col col-md-9"
                 />
                 <apps-headline 
                     :is-dark="true"
                     tag="p"
-                    :text="total"
-                    class="col-md-2 text-right"
+                    :text="`£${total}`"
+                    class="col-2 text-right"
                 />
             </div>
             <form 
                 class="summary-form"
-                :action="submit"
+                @submit.prevent="submitForm"
             >
                 <div class="summary-cta col-md-11 text-right p-0">
                     <apps-text-cta
                         :is-blue="true"
                         :is-button="true"
+                        :is-disabled="total === '0.00'"
+                        :is-loading="isSubmitting"
                         type="submit"
                         text="Buy Now"
                     />
@@ -124,11 +149,14 @@ export default {
     name: 'Summary',
     data () {
         return {
+            isSubmitted: false,
+            isSubmitting: false,
+            vatPercentage: 0.2,
+            subtotal: '0',
+            vat: '0',
+            total: '0',
             headings: Headings,
             items: [],
-            subtotal: '',
-            vat: '',
-            total: '',
         };
     },
     props: {
@@ -165,24 +193,35 @@ export default {
                 subtotal += price * quantity;
             });
 
-            this.subtotal = `£${this.twoDecimals(subtotal)}`;
-            this.vat = `£${this.twoDecimals(subtotal * 0.2)}`;
-            this.total = `£${this.twoDecimals(subtotal + subtotal * 0.2)}`;
+            this.subtotal = this.twoDecimals(subtotal);
+            this.vat = this.twoDecimals(subtotal * this.vatPercentage);
+            this.total = this.twoDecimals(subtotal + subtotal * this.vatPercentage);
+            // this.subtotal = subtotal ?? this.twoDecimals(subtotal);
+            // this.vat = subtotal ?? this.twoDecimals(subtotal * this.vatPercentage);
+            // this.total = subtotal ?? this.twoDecimals(subtotal + subtotal * this.vatPercentage);
         },
     },
     methods: {
         add(index) {
-            this.items[index].quantity ++;
-
-            this.items = [ ...this.items ];
+            this.setItem(index, 1);
         },
         reduce(index) {
-            this.items[index].quantity --;
+            this.setItem(index, -1);
+        },
+        remove(index) {
+            this.setItem(index, 0);
+        },
+        setItem(index, value) {
+            if (!!value) {
+                this.items[index].quantity += value;
+            } else {
+                this.items.splice(index, 1);
+            }
 
             this.items = [ ...this.items ];
         },
-        remove(index) {
-            this.items.splice(index, 1);
+        setQuantity(index, value) {
+            this.items[index].quantity = value;
 
             this.items = [ ...this.items ];
         },
@@ -201,6 +240,35 @@ export default {
         twoDecimals(amount) {
             return (Math.round(amount * 100) / 100).toFixed(2)
         },
+        async submitForm() {
+            this.isSubmitting = true;
+
+            const products = [];
+
+            this.items.forEach( ({ sku, quantity }) => {
+                products.push({
+                    sku,
+                    quantity,
+                });
+            });
+
+            await fetch('/submit-order', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify({
+                    products: products,
+                    final: this.total,
+                }),
+            })
+            .then(data => {
+                setTimeout(() => {
+                    this.isSubmitted = true;
+                }, 1000);
+            });
+        },
     },
     mounted() {
         this.setItems();
@@ -212,9 +280,12 @@ export default {
     .b-summary {
         width: 100%;
         max-width: 69rem;
-        margin: 12rem auto;
+        margin: 4.5rem auto;
         padding: 0 1.5rem;
         
+        @include md {
+            margin: 12rem auto;
+        }
 
         .summary-table {
             margin-top: 4.5rem;
@@ -222,7 +293,7 @@ export default {
         }
 
         .summary-headings {
-            border-bottom: 2px solid #efefef;
+            border-bottom: $grey-border;
         }
 
         .summary-items {

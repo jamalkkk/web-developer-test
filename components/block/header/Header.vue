@@ -1,9 +1,5 @@
 <template>
-  <div
-    :class="['b-header', {
-        'has-shadow': hasShadow,
-    }]"
-  >
+  <div class="b-header p-relative d-flex w-100 justify-content-between align-items-center">
     <a 
         class="header-logo"
         href="/"
@@ -15,7 +11,7 @@
         :on-click="toggleMenu"
     />
     <div 
-        :class="['header-navbar d-lg-block', {
+        :class="['header-navbar d-md-block', {
             'is-active': isMenuActive,
         }]"
     >
@@ -40,7 +36,7 @@
             link="/checkout"
         />
     </div>
-    <div class="header-navbar-menu d-lg-none">
+    <div class="header-navbar-menu d-md-none">
         <apps-icon-cta
             :is-button="true"
             class="header-link"
@@ -52,9 +48,7 @@
 </template>
 
 <script>
-import Overlay from '../../common/overlay/Overlay.vue';
 export default {
-    components: { Overlay },
     name: 'Header',
     props: {
         hasShadow: { 
@@ -84,17 +78,9 @@ export default {
 <style lang="scss">
     .b-header {
         z-index: 1;
-        position: relative;
-        display: flex;
-        width: 100%;
         height: 11rem;
         padding: 0 4.5rem;
-        align-items: center;
-        justify-content: space-between;
-
-        &.has-shadow {
-            box-shadow: 0 0 1rem .5rem #ccc;
-        }
+        box-shadow: 0 0 1rem .5rem $color-grey-light;
 
         .header-navbar {
             z-index: 1;
@@ -102,31 +88,33 @@ export default {
             display: none;
             flex-direction: column;
             top: 1rem;
-            right: -15rem;
+            right: 1rem;
             padding: 1rem;
             border-radius: 3px;
             align-self: flex-start;
-            background: #fff;
             box-shadow: 0 0 10rem 10rem transparent;
+            opacity: 0;
+            background: transparent;
             transition: $base-transition;
 
-            @include lg {
+            @include md {
                 position: static;
                 display: block;
                 padding: 0;
                 align-self: unset;
                 box-shadow: unset;
+                opacity: 1;
             }
 
             &.is-active {
                 display: flex;
-                right: 1rem;
                 box-shadow: 0 0 1rem .5rem #1115;
+                animation: $menu-fade-in-animation;
             }
         }
 
         .header-link:not(:first-of-type) {
-             @include lg {
+             @include md {
                 margin-left: 1rem;
             }
         }

@@ -35,7 +35,7 @@ export default {
         },
         link: { 
             type: String, 
-            default: ''
+            default: null,
         },
         icon: { 
             tyape: String, 
@@ -84,7 +84,7 @@ export default {
             cursor: not-allowed;
 
             svg {
-                fill: #ccc;
+                fill: $color-grey-light;
             }
         }
 
@@ -95,7 +95,7 @@ export default {
 
             &:hover {
                 text-decoration: none;
-                fill: #ccc;
+                fill: $color-grey-light;
             }
         }
     }

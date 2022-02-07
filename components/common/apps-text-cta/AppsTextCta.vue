@@ -4,6 +4,8 @@
         :class="['b-apps-text-cta', {
             'is-blue': isBlue,
             'is-button': isButton,
+            'is-disabled': isDisabled,
+            'is-loading': isLoading,
         }]"
         :disabled="isDisabled"
         :href="link"
@@ -27,6 +29,10 @@ export default {
             default: false
         },
         isDisabled: { 
+            type: Boolean, 
+            default: false
+        },
+        isLoading: { 
             type: Boolean, 
             default: false
         },
@@ -59,25 +65,35 @@ export default {
 
 <style lang="scss">
     .b-apps-text-cta {
-        color: #000;
+        color: $color-black;
         padding: .5rem 1.5rem 1.5rem;
         border-radius: 3px;
         text-transform: uppercase;
-        transition: all .3s ease-in;
+        transition: $base-transition;
         border: 0;
 
         &.is-blue {
-            color: #fff;
-            background-color: #448aff;
+            color: $color-white;
+            background-color: $color-blue;
 
             &:hover {
-                color: #fff;
+                color: $color-white;
             }
         }
 
+        &.is-loading {
+            background-color: $color-grey-light;
+            cursor: progress;
+        }
+
+        &:disabled {
+            background-color: $color-grey-light;
+            cursor: not-allowed;
+        }
+
         &:hover {
-            color: #000;
-            background-color: #ccc;
+            color: $color-black;
+            background-color: $color-grey-light;
             text-decoration: none;
         }
     }     

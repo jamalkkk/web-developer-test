@@ -8,12 +8,11 @@
             icon="minus"
             :on-click="reduce"
         />
-        <apps-headline 
-            :is-dark="true"
-            :is-font-light="true"
-            tag="p"
-            :text="`${value}`"
-            class="mb-0"
+        <apps-input 
+            :value="value"
+            :max="max"
+            :index="index"
+            :set-value="setQuantity"
         />
         <apps-icon-cta
             :is-button="true"
@@ -27,7 +26,9 @@
 </template>
 
 <script>
+import AppsInput from '../../apps-input/AppsInput.vue';
 export default {
+  components: { AppsInput },
     name: 'Quantity',
     data () {
         return {
@@ -35,6 +36,10 @@ export default {
         };
     },
     props: {
+        index: { 
+            type: Number, 
+            default: 0,
+        },
         value: { 
             type: Number, 
             default: 1,
@@ -55,8 +60,13 @@ export default {
                 return null;
             }
         },
+        setQuantity: { 
+            type: Function, 
+            default: function() {
+                return null;
+            }
+        },
     },
-    computed: {},
 }
 </script>
 
@@ -65,8 +75,7 @@ export default {
         display: flex;
         width: 7.5rem;
         height: 3rem;
-        margin: 0 auto;
-        border: 1px solid #448AFF;
+        border: 1px solid $color-blue;
         border-radius: 3px;
         align-items: center;
         justify-content: space-around;

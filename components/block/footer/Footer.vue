@@ -102,6 +102,8 @@ export default {
             margin-bottom: 2rem;
             align-items: center;
             justify-content: flex-end;
+            flex-wrap: wrap;
+            
 
             .footer-link:not(:first-of-type) {
                 margin-left: 1rem;
@@ -112,7 +114,7 @@ export default {
             margin: 0;
             text-align: right;
             font-size: 1.2rem;
-            color: #767676
+            color: $color-grey-medium
         }
     }
 </style>

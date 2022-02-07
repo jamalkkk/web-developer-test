@@ -1,1 +1,7 @@
-$base-transition: all .3s ease-out;
+$base-transition: all .3s cubic-bezier(0, 0, 0.11, 1.04);
+$fade-in-animation: fadeIn .8s .5s cubic-bezier(0, 0, 0.11, 1.04) forwards;
+$fade-out-animation: itemFadeOut .3s cubic-bezier(0, 0, 0.11, 1.04)  forwards;
+$menu-fade-in-animation: menuFadeIn .3s cubic-bezier(0, 0, 0.11, 1.04) forwards;
+$overlay-fade-in-animation: fadeIn .3s cubic-bezier(0, 0, 0.11, 1.04) forwards;
+
+$grey-border: 2px solid #efefef;

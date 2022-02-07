@@ -29,5 +29,8 @@ export default {
         bottom: 0;
         left: 0;
         background-color: #000000e0;
+        opacity: 0;
+        
+        animation: $overlay-fade-in-animation;
     }
 </style>

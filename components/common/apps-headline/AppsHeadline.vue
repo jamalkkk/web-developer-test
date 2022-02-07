@@ -55,11 +55,11 @@ export default {
         }
 
         &.is-inverted {
-            color: #fff;
+            color: $color-white;
         }
 
         &.is-dark {
-            color: #000;
+            color: $color-black;
         }
     }
 </style>

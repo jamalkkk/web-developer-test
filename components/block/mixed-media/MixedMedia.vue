@@ -1,8 +1,10 @@
 <template>
-    <div :class="['b-mixed-media', {
-        'has-image': !!imgName,
-        'text-center': isCentered,
-    }]"
+    <div
+        :class="['b-mixed-media', {
+            'has-image': !!imgName,
+            'text-center': isCentered,  
+        }]" 
+        ref="component"
     >
         <div 
             v-if="!!imgName"
@@ -43,6 +45,11 @@
 <script>
 export default {
     name: 'MixedMedia',
+    data () {
+        return {
+            isContentShown: false,
+        };
+    },
     props: {
         isCentered: { 
             type: Boolean, 
@@ -73,6 +80,25 @@ export default {
             default: '',
         },
     },
+    created () {
+        window.addEventListener('scroll', this.handleScroll);
+    },
+    destroyed () {
+        window.removeEventListener('scroll', this.handleScroll);
+    },
+    methods: {
+        handleScroll (event) {
+            if (!this.isContentShown) {
+                var scrolled = document.scrollingElement.scrollTop;
+                var position = this.$refs.component.offsetTop;
+
+                if(scrolled + document.documentElement.clientHeight * .8 > position ){
+                    this.$refs.component.classList.add('show-content');
+                    this.isContentShown = true;
+                }
+            }
+        }
+    }
 }
 </script>
 
@@ -81,7 +107,7 @@ export default {
         display: flex;
         flex-direction: column;
 
-        @include lg {
+        @include md {
             flex-direction: row;
         }
 
@@ -91,9 +117,15 @@ export default {
                 flex-direction: column;
                 justify-content: center;
 
-                @include lg {
+                @include md {
                     width: 50%;
                 }
+            }
+        }
+
+        &.show-content {
+            .mixed-media-content {
+                animation: $fade-in-animation;
             }
         }
 
@@ -102,7 +134,7 @@ export default {
             height: 100vw;
             order: 2;
 
-            @include lg {
+            @include md {
                 width: 50%;
                 height: 50vw;
                 order: 0;
@@ -113,8 +145,9 @@ export default {
             position: relative;
             width: 100%;
             padding: 6rem 3.5rem;
+            opacity: 0;
 
-            @include lg {
+            @include md {
                 padding: 13rem;
             }
 
