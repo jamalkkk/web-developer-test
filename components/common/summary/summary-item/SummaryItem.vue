@@ -1,10 +1,9 @@
 <template>
     <div 
-        :class="['b-summary-item', {
+        :class="['b-summary-item row no-gutters', {
             'is-removed': isRemoved,
         }]"
     >
-    <div class="row no-gutters"></div>
         <apps-headline 
             :is-dark="true"
             :is-font-light="true"
@@ -106,25 +105,25 @@ export default {
         },
         add: { 
             type: Function, 
-            default: function() {
+            default () {
                 return null;
             }
         },
         reduce: { 
             type: Function, 
-            default: function() {
+            default () {
                 return null;
             }
         },
         remove: { 
             type: Function, 
-            default: function() {
+            default () {
                 return null;
             }
         },
         setQuantity: { 
             type: Function, 
-            default: function() {
+            default () {
                 return null;
             }
         },

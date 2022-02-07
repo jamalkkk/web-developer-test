@@ -1,8 +1,6 @@
 <!-- Please remove this file from your project -->
 <template>
-  <div
-    class="b-footer"
-  >
+  <div class="b-footer">
     <div class="footer-left-items">
         <div class="footer-logo">
             <apps-logo />

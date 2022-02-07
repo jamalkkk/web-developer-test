@@ -196,9 +196,6 @@ export default {
             this.subtotal = this.twoDecimals(subtotal);
             this.vat = this.twoDecimals(subtotal * this.vatPercentage);
             this.total = this.twoDecimals(subtotal + subtotal * this.vatPercentage);
-            // this.subtotal = subtotal ?? this.twoDecimals(subtotal);
-            // this.vat = subtotal ?? this.twoDecimals(subtotal * this.vatPercentage);
-            // this.total = subtotal ?? this.twoDecimals(subtotal + subtotal * this.vatPercentage);
         },
     },
     methods: {

@@ -57,11 +57,11 @@ export default {
         },
         title: { 
             type: String, 
-            default: ''
+            default: '',
         },
         subtitle: { 
             type: String, 
-            default: ''
+            default: '',
         },
         imgName: { 
             type: String, 
@@ -69,11 +69,11 @@ export default {
         },
         imgAlt: { 
             type: String, 
-            default: ''
+            default: '',
         },
         ctaText: { 
             type: String, 
-            default: ''
+            default: '',
         },
         ctaLink: { 
             type: String, 

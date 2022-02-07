@@ -1,7 +1,5 @@
 <template>
-    <div
-        class="b-hero"
-    >
+    <div class="b-hero">
         <AppsImg 
             :img-name="imgName"
             :alt="imgAlt"
@@ -29,19 +27,19 @@ name: 'Hero',
     props: {
         title: { 
             type: String, 
-            default: ''
+            default: '',
         },
         subtitle: { 
             type: String, 
-            default: ''
+            default: '',
         },
         imgName: { 
             type: String, 
-            default: ''
+            default: '',
         },
         imgAlt: { 
             type: String, 
-            default: ''
+            default: '',
         },
     },
 }
@@ -51,7 +49,11 @@ name: 'Hero',
     .b-hero {
         position: relative;
         width: 100%;
-        height: calc(100vh - 11rem);
+        height: calc(100vw);
+
+        @include md {
+            height: calc(100vh - 11rem);
+        }
 
         .hero-content {
             position: absolute;
@@ -65,7 +67,6 @@ name: 'Hero',
             align-items: flex-start;
             justify-content: center;
             opacity: 0;
-
             animation: $fade-in-animation;
 
             @include md {

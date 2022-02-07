@@ -17,7 +17,7 @@ export default {
     props: {
         isDisabled: { 
             type: Boolean, 
-            default: false
+            default: false,
         },
         type: { 
             type: String, 
@@ -54,7 +54,6 @@ export default {
             set(newValue) {
                 let value = newValue || 0;
 
-                 console.log('value => this.min && value <= this.max', value, this.min, this.max, value >= this.min && value <= this.max);
                 if (value >= this.min && value <= this.max) {
                     this.setValue(this.index, value);
                 }

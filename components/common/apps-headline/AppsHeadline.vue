@@ -18,23 +18,23 @@ export default {
     props: {
         isFontLight: { 
             type: Boolean, 
-            default: false
+            default: false,
         },
         isInverted: { 
             type: Boolean, 
-            default: false
+            default: false,
         },
         isDark: { 
             type: Boolean, 
-            default: false
+            default: false,
         },
         tag: { 
             type: String, 
-            default: 'h1'
+            default: 'h1',
         },
         text: { 
             type: String, 
-            default: ''
+            default: '',
         },
     },
     computed: {

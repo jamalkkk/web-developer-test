@@ -50,19 +50,19 @@ export default {
         },
         add: { 
             type: Function, 
-            default: function() {
+            default () {
                 return null;
             }
         },
         reduce: { 
             type: Function, 
-            default: function() {
+            default () {
                 return null;
             }
         },
         setQuantity: { 
             type: Function, 
-            default: function() {
+            default () {
                 return null;
             }
         },

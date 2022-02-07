@@ -22,19 +22,19 @@ export default {
     props: {
         isButton: { 
             type: Boolean, 
-            default: false
+            default: false,
         },
         isBlue: { 
             type: Boolean, 
-            default: false
+            default: false,
         },
         isDisabled: { 
             type: Boolean, 
-            default: false
+            default: false,
         },
         isLoading: { 
             type: Boolean, 
-            default: false
+            default: false,
         },
         type: { 
             type: String, 
@@ -46,11 +46,11 @@ export default {
         },
         text: { 
             tyape: String, 
-            default: ''
+            default: '',
         },
         onClick: { 
             type: Function, 
-            default: function() {
+            default () {
                 return null;
             }
         },

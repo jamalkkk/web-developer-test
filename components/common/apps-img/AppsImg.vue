@@ -13,18 +13,17 @@ export default {
     props: {
         imgName: { 
             type: String, 
-            default: ''
+            default: '',
         },
         alt: { 
             type: String, 
-            default: 'Image'
+            default: 'Image',
         },
     },
     computed: {
         imgSrc () {
             const fileName = this.imgName.toLowerCase();
-
-            return require(`~/assets/img/${fileName}.jpg`) // the module request
+            return require(`~/assets/img/${fileName}.jpg`) 
         },
     },
 }
