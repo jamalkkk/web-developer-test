@@ -7,3 +7,5 @@ describe('AppsHeadline', () => {
     expect(wrapper.vm).toBeTruthy()
   })
 })
+
+/* TODO: Add more unit tests */

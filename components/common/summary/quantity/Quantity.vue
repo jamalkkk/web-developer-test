@@ -1,5 +1,5 @@
 <template>
-    <div class="b-quantity">
+    <div class="b-quantity px-3">
         <apps-icon-cta
             :is-button="true"
             :is-small="true"
@@ -8,6 +8,7 @@
             icon="minus"
             :on-click="reduce"
         />
+        <!-- TODO: User can only enter numebrs manually within range -->
         <apps-input 
             :value="value"
             :max="max"
@@ -26,15 +27,8 @@
 </template>
 
 <script>
-import AppsInput from '../../apps-input/AppsInput.vue';
 export default {
-  components: { AppsInput },
     name: 'Quantity',
-    data () {
-        return {
-            headings: [],
-        };
-    },
     props: {
         index: { 
             type: Number, 

@@ -22,8 +22,7 @@ export default {
     },
     computed: {
         imgSrc () {
-            const fileName = this.imgName.toLowerCase();
-            return require(`~/assets/img/${fileName}.jpg`) 
+            return require(`~/assets/img/${this.imgName.toLowerCase()}.jpg`) 
         },
     },
 }

@@ -11,8 +11,8 @@
             class="mixed-media-img"
         >
             <apps-img 
-                img-name="mixed-media"
-                alt="Mixed Media Image"
+                :img-name="imgName"
+                :alt="imgAlt"
             />
 
         </div>
@@ -65,7 +65,7 @@ export default {
         },
         imgName: { 
             type: String, 
-            default: null,
+            default: '',
         },
         imgAlt: { 
             type: String, 

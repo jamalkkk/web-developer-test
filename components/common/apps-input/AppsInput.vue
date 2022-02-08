@@ -65,7 +65,7 @@ export default {
 
 <style lang="scss">
     .b-apps-input {
-        width: 1.5rem;
+        width: 2.4rem;
         border: 0;
         outline: 0;
         font-weight: 200;
