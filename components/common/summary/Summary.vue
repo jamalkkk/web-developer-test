@@ -60,6 +60,7 @@
 
                 />
             </div>
+            <!-- TODO: Inculde animation counter plugin when price changes  -->
             <div class="summary-total row no-gutters mb-2">
                 <apps-headline 
                     :is-dark="true"
@@ -208,7 +209,7 @@ export default {
         remove(index) {
             this.setItem(index, 0);
         },
-        setItem(index, value) {
+        setItem(index, value) { /* TODO: Add test here to ensure this methods setting the items correctly */
             if (!!value) {
                 this.items[index].quantity += value;
             } else {
@@ -217,7 +218,7 @@ export default {
 
             this.items = [ ...this.items ];
         },
-        setQuantity(index, value) {
+        setQuantity(index, value) { /* TODO: Add test here to check correcy qunatity is added */
             this.items[index].quantity = value;
 
             this.items = [ ...this.items ];
